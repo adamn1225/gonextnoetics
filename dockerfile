@@ -1,20 +1,20 @@
-# Use a minimal Go image
+# Use a small Golang image
 FROM golang:1.22-alpine
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the Go source files into the container
+# Copy everything into the container
 COPY . .
 
 # Download dependencies
 RUN go mod tidy
 
-# Build the Go binary
-RUN go build -o backend
+# Build the Go application
+RUN go build -o main .
 
-# Expose port 5000 (since we changed it from 8080)
+# Expose the port for the Go server
 EXPOSE 5000
 
-# Run the compiled Go application
-CMD ["./backend"]
+# Run the Go app
+CMD ["./main"]
